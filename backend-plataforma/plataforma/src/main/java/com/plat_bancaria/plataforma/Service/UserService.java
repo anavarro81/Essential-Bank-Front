@@ -12,7 +12,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User findUserByEmail(String email) {
-        return userRepository.findByUserEmail(email);
+        return userRepository.findByEmail(email);
     }
 
     public User saveUser(User user) {
