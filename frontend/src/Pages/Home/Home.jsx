@@ -1,7 +1,7 @@
 import React from 'react'
 import {  } from 'react-icons/bi';
 import profilePicture from '../../assets/Images/Photo.jpg'
-
+import '../../css/main.css'
 
 
 const Home = () => {
@@ -14,10 +14,12 @@ const Home = () => {
   
 return (
     
-    <> 
+    <div className='main'>
 
     {/* header */}
-    <div className='bg-primary w-full h-[96px] justify-center  text-white flex items-center'>
+
+    
+    <div className='bg-primary w-full h-[96px] justify-center  text-white flex items-center '>
 
 
         {/* Vector logo */}
@@ -58,7 +60,7 @@ return (
 
     {/* <div className='flex flex-col items-center justify-center min-h-screen bg-white'></div> */}
 
-    <section id='main-container' className='container flex flex-col justify-center items-center space-y-5 '>
+    <section id='main-container' className='container flex flex-col  items-center space-y-5 '>
         <div className='flex justify-around items-center gap-5' >        
             
             <div className='flex items-center justify-center gap-10 pt-3'>
@@ -153,7 +155,7 @@ return (
     </section>
 
         
-    </>
+    </div> 
   )
 }
 

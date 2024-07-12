@@ -10,7 +10,7 @@ function App() {
 
 
   return (
-    <div className='main'>
+    <div className='main relative'>
     {/* <Login/> */}
     <Home/>
     <Footer/>
