@@ -12,8 +12,17 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return userService.saveUser(user);
+    public String register(@RequestBody User user) {
+        userService.saveUser(user);
+        return "Usuario registrado";
+    }
+
+    @GetMapping("/verify")
+    public String verifyAccount(@RequestParam String email, @RequestParam String token) {
+        if (userService.verifyUser(email, token)) {
+            return "Cuenta verificada. Puedes iniciar sesión.";
+        }
+        return "token invalido.";
     }
 
     @PostMapping("/login")
