@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BiUser, BiKey, BiShowAlt, BiHide, BiFingerprint } from 'react-icons/bi';
+import { Link } from "react-router-dom"
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,23 +11,23 @@ export default function LoginPage() {
 
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-white'>
-    
-    {/* Logo Essential Bank */}
+
+      {/* Logo Essential Bank */}
       <div className='mb-8 text-center'>
         <h1 className='text-6xl font-bold text-blue-500'>Essential</h1>
         <h2 className='text-4xl font-bold text-blue-700'>Bank</h2>
       </div>
 
-      {/* Bievenido */}  
+      {/* Bievenido */}
 
       <div>
         <h2 className='text-4xl mb-8'> ¡Bienvenid@! </h2>
       </div>
 
 
-      
+
       <div className='w-full max-w-xs'>
-        
+
         {/* User input*/}
         <label className='block mb-2 text-sm font-bold text-gray-700'>Usuario</label>
         <div className='flex items-center mb-6 border rounded shadow  bg-greyDesign'>
@@ -49,17 +50,17 @@ export default function LoginPage() {
         <div className='text-center mb-4'>
           <a href='#' className='text-sm text-black hover:underline'>¿Olvidaste la clave?</a>
         </div>
-       
+
         <div className='flex items-center justify-center gap-4'>
           <button className='flex justify-center items-center px-2 py-2 text-black bg-greyDesign focus:outline-none'>
-            <BiFingerprint className='' />          
+            <BiFingerprint className='' />
           </button>
-          <p> Ingresar con biometría </p> 
+          <p> Ingresar con biometría </p>
         </div>
 
         <div className='flex items-center justify-between text-center mt-4'>
           <p className='text-gray-700'>¿Aún no tienes cuenta?</p>
-          <button className='mt-2 px-4 py-2 bg-greyDesign text-black rounded  transition-colors'>Registrarse</button>
+          <button className='mt-2 px-4 py-2 bg-greyDesign text-black rounded  transition-colors'>  <Link to={'/Register'}> Registrarse</Link>  </button>
         </div>
       </div>
     </div>
