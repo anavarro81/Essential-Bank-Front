@@ -1,4 +1,4 @@
-# Título: Banco Digital Accesible (¿Esencial?)
+# Esencial: Banca Digital Accesible
 
 ## Industria: Fintech. 
 
