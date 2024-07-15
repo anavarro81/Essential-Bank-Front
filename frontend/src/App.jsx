@@ -7,10 +7,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register2 from './pages/register/Register2.jsx';
 import Register3 from './pages/register/Register3.jsx';
 
-import Login from './Pages/Login/Login'
-import Home from './Pages/Home/Home'
-import Transfer from './Pages/Transfer/Transfer' 
-import Footer from './components/Footer'
+
+// import Home from './Pages/Home/Home'
+// import Transfer from './Pages/Transfer/Transfer'
+// import Footer from './components/Footer'
 
 import './css/main.css'
 
