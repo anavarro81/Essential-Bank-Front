@@ -46,7 +46,7 @@ export default function LoginPage() {
         </div>
 
 
-        <button className='w-full px-4 py-2 mb-4 text-black bg-greyDesign rounded  focus:outline-none'>Ingresar</button>
+        <Link to="/Home" ><button className='w-full px-4 py-2 mb-4 text-black bg-greyDesign rounded  focus:outline-none'>Ingresar</button></Link>
         <div className='text-center mb-4'>
           <a href='#' className='text-sm text-black hover:underline'>¿Olvidaste la clave?</a>
         </div>
