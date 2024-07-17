@@ -65,21 +65,21 @@ const Home = () => {
                         </div>
 
                         <div>
-                            <div className="flex flex-col items-center justify-center bg-lightGrey  text-white font-semibold rounded-lg p-5 shadow-lg transition duration-300 ease-in-out hover:bg-opacity-75 focus:outline-none" tabindex="0" aria-label="Home">
+                            <Link to="/Transfers" > <div className="flex flex-col items-center justify-center bg-lightGrey  text-white font-semibold rounded-lg p-5 shadow-lg transition duration-300 ease-in-out hover:bg-opacity-75 focus:outline-none" tabindex="0" aria-label="Home">
 
                                 <Icon type={"Transfers"} />
                             </div>
-                            <Link to="/Transfers" ><p className='text-center text-sm pt-1'> Hacer transferencias </p> </Link>
-
+                                <p className='text-center text-sm pt-1'> Hacer transferencias </p>
+                            </Link>
                         </div>
 
                         <div>
-                            <div className="flex flex-col items-center justify-center bg-lightGrey  text-white font-semibold rounded-lg p-5 shadow-lg transition duration-300 ease-in-out hover:bg-opacity-75 focus:outline-none" tabindex="0" aria-label="Home">
+                            <Link to="/Pay"> <div className="flex flex-col items-center justify-center bg-lightGrey  text-white font-semibold rounded-lg p-5 shadow-lg transition duration-300 ease-in-out hover:bg-opacity-75 focus:outline-none" tabindex="0" aria-label="Home">
                                 <Icon type={"Services"} />
 
                             </div>
-                            <p className='text-center text-sm pt-1'> Pagar mis servicios </p>
-
+                                <p className='text-center text-sm pt-1'> Pagar mis servicios </p>
+                            </Link>
                         </div>
 
                         <div>
