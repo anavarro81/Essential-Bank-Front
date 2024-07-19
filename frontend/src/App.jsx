@@ -17,6 +17,8 @@ import './css/main.css'
 import Pay from './pages/Servicespay/Pay.jsx';
 import PayStepContainer from './pages/Servicespay/PayStepContainer.jsx';
 
+import {AssistantProvider} from '../src/Providers/AssistantProvider.jsx'
+
 
 
 function App() {
@@ -26,7 +28,12 @@ function App() {
 
     <>
 
+
+    
+      <AssistantProvider>
       <BrowserRouter>
+      
+
         <Routes>
 
           <Route path='/' element={<Login />} />
@@ -44,7 +51,12 @@ function App() {
 
 
         </Routes>
+
+        
       </BrowserRouter>
+      </AssistantProvider>
+      
+
     </>
 
   )
