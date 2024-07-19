@@ -1,25 +1,47 @@
 ### Requerimientos y Restricciones de los Campos
 
-### Escenario 1: 
-** Objetivo: Asegurar que un usuario pueda iniciar sesión y acceder a la aplicación de Essential
- Casos de Prueba Asociados:
- TC01: El usuario puede iniciar sesión con credenciales válidas.
- TC02: El usuario no puede iniciar sesión con una contraseña incorrecta.
- TC03: El usuario puede recuperar su contraseña si la ha olvidado.
- TC04: El usuario puede verificar su número de teléfono con el código que ha recibido por medio de mensaje de texto
- TC05: El usuario puede verificar su número de teléfono con el código que ha recibido por medio de mensaje de texto
- TC06: El usuario puede crear una clave de usuario cuando las dos claves ingresadas son válidas
- TC05: El usuario no puede crear una clave de usuario cuando las dos claves ingresadas son inválidas
+#### 1. Fecha de Nacimiento
+- **Formato:** DD/MM/AAAA
+- **Validación:** usuario escribe la fecha (no puede ser menor al 16 julio de 2006)
+- **Restricción de Edad:** El usuario debe ser mayor de 18 años
+- **Campo Obligatorio:** Sí
 
- Escenario 2: 
- Objetivo: El usuario puede utilizar la aplicación para realizar transferencias electrónicas
- Casos de Prueba Asociados:
- TC01: El usuario puede transferir $100 a un usuario de su lista de preferidos de su saldo disponible
- TC02: El usuario puede pagar el servicio de energía con su saldo disponible
+#### 2. ID (Nombre de Usuario-único)
+- **Formato:** Alfanumérico
+- **Restricciones:** sin espacios (el espacio se elimina de manera automática cuando se mueve el focus del campo) 
+- **Longitud:** Entre 5 y 20 caracteres
+- **Unicidad:** Debe ser único paraa toda la base de datos
+- **Validación:** es igual al correo electrónico
+- **Campo Obligatorio:** Sí
 
- Escenario 3: 
- Objetivo: El botón de ayuda asiste al usuario en la realización de sus operaciones bancarias
- TC01:
- TC02:
- TC03:
+#### 3. Nombre
+- **Formato:** Texto
+- **Restricciones:** solo caracteeres del alfabeto latino. No permite caracteres especiales (solo consierar el uso de la ñ y sin tildes)
+- **Longitud:** Entre 2 y 15 caracteres
+- **Validación:** Solo letras y espacios
+- **Campo Obligatorio:** Sí
 
+#### 4. Correo Electrónico
+- **Formato:** Formato de correo electrónico válido (e.g., usuario@dominio.com)
+- **Unicidad:** Debe ser único
+- **Campo Obligatorio:** Sí
+
+#### 5. Contraseña
+- **Formato:** Alfanumérico y caracteres especiales.
+- **Restricciones:** sin espacios (el espacio se elimina de manera automática cuando se mueve el focus del campo) 
+- **Longitud:** Mínimo 6 caracteres Máximo 20
+- **Validación:** Debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial
+- **Campo Obligatorio:** Sí
+
+#### 6. Teléfono
+- **Formato:** Numérico
+- **Restricciones:** sin espacios (el espacio se elimina de manera automática cuando se mueve el focus del campo) 
+- **Longitud:** 10 dígitos (hacerlo específico por país) (comentario: escoger un pais y hacerlo específico para este mismo: españa son 9, colombia 10 o que la longitud del campo depende del prefijo del país)
+- **Validación:** Solo números, no espacios
+- **Campo Obligatorio:** Sí
+
+#### 7. DNI
+- **Formato:** Alfanumérico
+- **Longitud:** Entre 7 y 15 caracteres
+- **Validación:** Solo números y letras del alfabeto latino (el espacio se elimina de manera automática cuando se mueve el focus del campo) 
+- **Campo Obligatorio:** Sí
