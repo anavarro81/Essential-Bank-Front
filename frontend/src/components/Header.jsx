@@ -1,5 +1,6 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, } from 'react';
+import { Link } from 'react-router-dom'
 import Icon from './Icon/Icon'
 
 import {useAssistant} from '../Providers/AssistantProvider'
@@ -9,7 +10,7 @@ const Header = () => {
   
   const [assistantActive, setAssistantActive] = useAssistant();
 
-  console.log('>> assi', assistantActive);
+  
   
 
   const activeAssistant = () => {
@@ -26,17 +27,27 @@ const Header = () => {
 
 
    <div className='bg-primary w-full h-[96px] justify-center  text-white flex items-center '>
-        <div className='flex justify-center grow'>
-        <Icon type='Logo'/>        
-
-        </div>
+        
+        {/*  Si hace clic en el logo, se redirecciona a Home */}
+          <div className='flex justify-center grow cursor-pointer'>
+          <Link to="/Home">     
+            <Icon type='Logo'/>        
+          </Link>
+          </div>
+        
+        
 
         <div className='flex gap-2 mr-3'>                     
 
         
         <button className='flex gap-2' onClick={activeAssistant}>
-        <p className=''>Ayuda {assistantActive && <span> activada </span>} </p>
-          <Icon type='Warning'/>
+
+          <div className='flex items-center gap-2'> 
+            <p className=''> Ayuda </p>           
+            {assistantActive ?  <Icon type='SwitchOn'/> : <Icon type='SwitchOff'/> }
+          </div>
+          
+        
         </button>
         </div>        
   </div>
