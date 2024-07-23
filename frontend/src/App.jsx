@@ -17,20 +17,32 @@ import './css/main.css'
 import Pay from './Pages/Servicespay/Pay.jsx';
 import PayStepContainer from './Pages/Servicespay/PayStepContainer.jsx';
 
-import { AssistantProvider } from '../src/Providers/AssistantProvider.jsx'
+
+import {AssistantProvider} from '../src/Providers/AssistantProvider.jsx'
+
+import { UserProvider } from './Providers/UserProvider.jsx';
+
+// Profile y sub paginas
+import ProfilePage from './Pages/ProfilePage/ProfilePage.jsx';
+import EditFullNamePage from './Pages/EditFullNamePage/EditFullNamePage.jsx';
+import EditPhoneNumber from './Pages/EditFullNamePage/EditPhoneNumber.jsx';
+import EditEmail from './Pages/EditEmail/EditEmail.jsx';
+import EditPassword from './Pages/EditPassword/EditPassword.jsx';
 
 import PrivateRoutes from './auth/PrivateRoutes.jsx';
+
 
 function App() {
 
 
   return (
 
-    <>
+    <div className='app'> 
 
 
 
-      <AssistantProvider>
+      <AssistantProvider> 
+        <UserProvider> 
         <BrowserRouter>
 
 
@@ -50,6 +62,11 @@ function App() {
               <Route path='/TransferStepContainer' element={<TransferStepContainer />} />
               <Route path='/Pay' element={<Pay />} />
               <Route path='/PayStepContainer' element={<PayStepContainer />} />
+              <Route path='Profile' element={<ProfilePage />} />
+              <Route path='editName' element={<EditFullNamePage/>} />
+              <Route path='/editPassword' element={<EditPassword/>} />
+              <Route path='/editPhoneNumber' element={<EditPhoneNumber/>} />
+              <Route path='/editEmail' element={<EditEmail/>} />
             </Route>
 
 
@@ -62,10 +79,11 @@ function App() {
 
 
         </BrowserRouter>
+        </UserProvider>
       </AssistantProvider>
 
 
-    </>
+    </div>
 
   )
 }
