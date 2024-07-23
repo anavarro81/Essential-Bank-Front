@@ -20,6 +20,8 @@ import PayStepContainer from './Pages/Servicespay/PayStepContainer.jsx';
 
 import {AssistantProvider} from '../src/Providers/AssistantProvider.jsx'
 
+import { UserProvider } from './Providers/UserProvider.jsx';
+
 // Profile y sub paginas
 import ProfilePage from './Pages/ProfilePage/ProfilePage.jsx';
 import EditFullNamePage from './Pages/EditFullNamePage/EditFullNamePage.jsx';
@@ -35,11 +37,12 @@ function App() {
 
   return (
 
-    <>
+    <div className='app'> 
 
 
 
-      <AssistantProvider>
+      <AssistantProvider> 
+        <UserProvider> 
         <BrowserRouter>
 
 
@@ -76,10 +79,11 @@ function App() {
 
 
         </BrowserRouter>
+        </UserProvider>
       </AssistantProvider>
 
 
-    </>
+    </div>
 
   )
 }
