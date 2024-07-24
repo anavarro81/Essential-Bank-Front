@@ -31,7 +31,7 @@ public class VerificationToken {
 
     private String generateVerificationCode() {
         SecureRandom random = new SecureRandom();
-        int num = random.nextInt(999999);
-        return String.format("%06d", num);
+        int num = random.nextInt(9999);
+        return String.format("%04d", num);
     }
 }

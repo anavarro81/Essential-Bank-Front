@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import users from '../../data/data'
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../Providers/UserProvider';
+import axios from 'axios';
 
 
 export default function LoginPage() {
@@ -62,39 +63,58 @@ export default function LoginPage() {
       
   }
 
-  const handleSubmit = (e) => {
 
-    e.preventDefault();  
-
-    setemailError('')
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
 
+    console.log("Email:", email);
+    console.log("Password:", password);
+    console.log("Email Error:", emailError);
+    console.log("Password Error:", passwordError);
 
     if (!emailError && !passwordError) {
-      // simular 
-      let userIndex = users.findIndex(user => user.email === email)
 
-      if (userIndex == -1) {
-        setemailError('El correo introducido no existe')  
-      } else if (users[userIndex].password === password) {        
-        console.log('guardo el token');  
-        localStorage.setItem('token', '1234')
-          
-          console.log('Usuario: users[userIndex]', users[userIndex]);
-          // FIXME: Cuando este el back recuperar los datos que nos manden. 
-          setsetUser(users[userIndex])
-          navigate("/Home")
 
-        } else {
-          setPasswordError('Contraseña no valida')
+        try {
+            console.log("Enviando solicitud a la API...");
+            
+            console.log('email: ', email);
+            console.log('password: ', password);
+
+            const response = await axios.post(`https://plataforma-i.onrender.com/users/login?email=${email}&password=${password}`, {
+                email: email,
+                password: password,
+            });
+
+            console.log("Respuesta de la API:", response);
+
+            if (response.status === 200) {
+                navigate("/Home");
+            } else {
+                setPasswordError('Correo electrónico o contraseña incorrectos');
+            }
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+            if (error.response) {
+                console.error("Detalles del error:", error.response.data);
+                if (error.response.status === 401) {
+                    setPasswordError('Correo electrónico o contraseña incorrectos');
+                } else {
+                    setPasswordError('Ocurrió un error, por favor intenta nuevamente');
+                }
+            } else {
+                setPasswordError('Ocurrió un error, por favor intenta nuevamente');
+            }
+
         }
-      }
+    } else {
+        console.log("Errores en la validación, no se enviará la solicitud.");
+    }
+};
 
-    } 
 
     
-
-  
 
 
   return (
@@ -109,7 +129,7 @@ export default function LoginPage() {
       {/* Bievenido */}
 
       <div>
-        <h2 className='text-4xl mb-8'> ¡Bienvenid@! </h2>
+        <h2 className='text-4xl mb-8'> ¡¡¡Bienvenid@!!! </h2>
       </div>
 
 
@@ -117,7 +137,7 @@ export default function LoginPage() {
       <div className='w-full max-w-xs '>
 
 
-        <form action="" onSubmit={handleSubmit}> 
+        <form onSubmit={handleSubmit}> 
 
         {/* User input*/}
         <label className='block mb-2 text-sm font-bold text-gray-700'>Usuario</label>
@@ -132,6 +152,7 @@ export default function LoginPage() {
             className={` ${emailError ? 'border-red-300' : 'border-none'}  pl-10 block border w-full p-2 leading-tight  bg-lightGrey text-gray-700  focus:outline-none focus:shadow-outline` } 
             placeholder=''             
             onBlur={handleEmailChange}
+            onChange={handleEmailChange}
             />         
       
 
@@ -154,6 +175,9 @@ export default function LoginPage() {
           type={showPassword ? 'text' : 'password'} 
           className= {`  pl-10 border w-full p-2 leading-tight bg-lightGrey text-gray-700 focus:outline-none focus:shadow-outline`} 
           onBlur={handlePasswordChange}
+          onChange={(e) => {handlePasswordChange(e);
+            setPassword(e.target.value);}
+          }
           placeholder='' 
           id='claveInput' />
 
@@ -181,7 +205,7 @@ export default function LoginPage() {
 
 
         
-          <button className={`w-full px-4 py-2 mb-4 text-black ${!emailError && !passwordError ?  'bg-green-600' :  'bg-lightGrey cursor-not-allowed' }  rounded  focus:outline-none`}  ref={IngresarBtn} >
+          <button type='submit' className={`w-full px-4 py-2 mb-4 text-black ${!emailError && !passwordError ?  'bg-green-600' :  'bg-lightGrey cursor-not-allowed' }  rounded  focus:outline-none`}  ref={IngresarBtn} >
             Ingresar
           </button>
         
