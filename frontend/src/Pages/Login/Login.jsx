@@ -74,6 +74,10 @@ export default function LoginPage() {
     if (!emailError && !passwordError) {
         try {
             console.log("Enviando solicitud a la API...");
+            
+            console.log('email: ', email);
+            console.log('password: ', password);
+
             const response = await axios.post(`https://plataforma-i.onrender.com/users/login?email=${email}&password=${password}`, {
                 email: email,
                 password: password,
