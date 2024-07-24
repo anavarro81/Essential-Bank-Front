@@ -1,6 +1,32 @@
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import axios from 'axios';
 
 export default function Register2() {
+    const [codigo, setCodigo] = useState('');
+    const [message, setMessage] = useState('');
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { email } = location.state || {};
+
+    const handleVerify = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('https://plataforma-i.onrender.com/users/verify', null, {
+                params: {
+                    email: email,
+                    token: codigo
+                }
+            });
+            if (response.status === 200) {
+                navigate('/RegisterPaso3', { state: { email: email } });
+            } else {
+                setMessage('Codigo de verificación Invalido');
+            }
+        } catch (error) {
+            setMessage('Codigo de verificación Erroneo');
+        }
+    };
     return (
         <div className='flex flex-col items-center justify-center min-h-screen bg-white'>
 
@@ -23,50 +49,39 @@ export default function Register2() {
                         Te enviamos un código SMS al
                     </p>
                     <p className="text-3xl text-[#242054]">
-                        +63 815 3465 798
+                        {email}
                     </p>
                 </div>
 
-                <div className='flex justify-center mb-6'>
-                    <div className='flex-shrink-0 w-12 h-12 mr-4 border rounded shadow bg-gray-200'>
-                        <input
-                            type='text'
-                            className='w-full h-full bg-transparent text-gray-700 border-none focus:outline-none text-center'
-                            placeholder=''
-                        />
+                <form onSubmit={handleVerify}>
+                    <div className='flex justify-center mb-6'>
+                        {[...Array(4)].map((_, i) => (
+                            <div key={i} className='flex-shrink-0 w-12 h-12 mr-4 border rounded shadow bg-gray-200'>
+                                <input
+                                    type='text'
+                                    maxLength="1"
+                                    className='w-full h-full bg-transparent text-gray-700 border-none focus:outline-none text-center'
+                                    value={codigo[i] || ''}
+                                    onChange={(e) => {
+                                        const newCodigo = codigo.split('');
+                                        newCodigo[i] = e.target.value;
+                                        setCodigo(newCodigo.join(''));
+                                    }}
+                                    placeholder=''
+                                />
+                            </div>
+                        ))}
                     </div>
-                    <div className='flex-shrink-0 w-12 h-12 mr-4 border rounded shadow bg-gray-200'>
-                        <input
-                            type='text'
-                            className='w-full h-full bg-transparent text-gray-700 border-none focus:outline-none text-center'
-                            placeholder=''
-                        />
+
+                    {/* Botones de Atras y Siguiente */}
+                    <div className='flex justify-end text-center mt-16'>
+                        <Link to="/Register">
+                            <button className='mt-2 px-4 py-2 text-black rounded transition-colors'> Atras </button>
+                        </Link>
+                        <button type='submit' className='mt-2 px-4 py-2 bg-[#242054] text-white rounded transition-colors'> Siguiente</button>
                     </div>
-                    <div className='flex-shrink-0 w-12 h-12 mr-4 border rounded shadow bg-gray-200'>
-                        <input
-                            type='text'
-                            className='w-full h-full bg-transparent text-gray-700 border-none focus:outline-none text-center'
-                            placeholder=''
-                        />
-                    </div>
-                    <div className='flex-shrink-0 w-12 h-12 mr-4 border rounded shadow bg-gray-200'>
-                        <input
-                            type='text'
-                            className='w-full h-full bg-transparent text-gray-700 border-none focus:outline-none text-center'
-                            placeholder=''
-                        />
-                    </div>
-                </div>
-
-                {/* Botones de Atras y Siguiente */}
-                <div className='flex justify-end  text-center mt-16 '>
-
-                    <Link to="/Register"> <button className='mt-2 px-4 py-2 text-black rounded transition-colors'> Atras </button></Link>
-
-                    <Link to="/RegisterPaso3" > <button className='mt-2 px-4 py-2 bg-[#242054] text-white rounded transition-colors'> Siguiente</button> </Link>
-
-
-                </div>
+                </form>
+                {message && <p>{message}</p>}
             </div>
         </div>
     );

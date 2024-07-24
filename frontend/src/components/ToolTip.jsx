@@ -36,11 +36,18 @@ const ToolTip = ({children, id}) => {
                 searchToolTip(id) 
             }   
         }
+
+        const hideToolTip = () => {
+            if (assistantActive) {
+                setIsOpen(false)
+                
+            }  
+        }
         
         
         return (    
                 
-                <div className='relative' onClick={toggleTooltip}> 
+                <div className='relative' onMouseEnter={toggleTooltip} onMouseLeave={hideToolTip}> 
                     {children}
 
                 {isOpen && 

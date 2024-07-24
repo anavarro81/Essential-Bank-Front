@@ -16,7 +16,10 @@ import { Link } from 'react-router-dom';
 import {useAssistant} from '../../Providers/AssistantProvider'
 import tooltips from '../../data/tooltipsText'
 import users from '../../data/data'
+import Footer from '../../../src/components/Footer'
 
+// FIXME: Cuando este el back. Quitarlo. 
+import { useUser} from '../../Providers/UserProvider';
 
 
 
@@ -25,10 +28,9 @@ import users from '../../data/data'
 
 const Home = () => {
 
-    const data = {
-        name: 'Marisol Domi',
-        balance: "$5.435,00 usd"
-    }
+    const [user, setsetUser] = useUser()
+
+
 
 
     const [assistantActive, setAssistantActive] = useAssistant();
@@ -62,7 +64,7 @@ const Home = () => {
                             
 
                             <ToolTip id={'userName'}> 
-                                <span className='text-xl text-primary text-[24px]'> {data.name} </span>
+                                <span className='text-xl text-primary text-[24px]'> {user.name} {user.surname} </span>
                             </ToolTip>
                                 
 
@@ -90,7 +92,7 @@ const Home = () => {
                 <section id='account-info'>
                     <p> El saldo actual de tu cuenta es </p>
                     <ToolTip id={'balanceDisplay'}>  
-                        <p className='text-[36px]'> {data.balance} </p>
+                        <p className='text-[36px]'> {user.balance} </p>
                     </ToolTip>
                 </section>
 
@@ -161,6 +163,8 @@ const Home = () => {
 
 
         </div>
+
+        <Footer/>
 
         </>
 
