@@ -92,6 +92,7 @@ export default function LoginPage() {
 
             if (response.status === 200) {
                 navigate("/Home");
+                localStorage.setItem('token', response.data.token);
             } else {
                 setPasswordError('Correo electrónico o contraseña incorrectos');
             }
