@@ -25,12 +25,12 @@ public class UserController {
     private final TokenService tokenService;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok("Usuario eliminado");
     }
-    @GetMapping("/{id}")
+    @GetMapping("/search/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
