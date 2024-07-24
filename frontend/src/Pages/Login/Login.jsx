@@ -120,7 +120,7 @@ export default function LoginPage() {
       {/* Bievenido */}
 
       <div>
-        <h2 className='text-4xl mb-8'> ¡Bienvenid@! </h2>
+        <h2 className='text-4xl mb-8'> ¡¡¡Bienvenid@!!! </h2>
       </div>
 
 
