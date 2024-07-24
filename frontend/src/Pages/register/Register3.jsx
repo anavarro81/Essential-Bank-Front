@@ -19,7 +19,7 @@ export default function Register3() {
             return;
         }
         try {
-            const response = await axios.post('http://localhost:8080/users/set-password', {
+            const response = await axios.post('https://plataforma-i.onrender.com/users/set-password', {
                 
                 email: email,
                 password: password
