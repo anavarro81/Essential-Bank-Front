@@ -21,7 +21,7 @@ export default function Register3() {
         e.preventDefault();
         try {
            
-            const response = await fetch('https://plataforma-i.onrender.com/users/register', {
+            const response = await fetch('http://localhost:8080/users/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
