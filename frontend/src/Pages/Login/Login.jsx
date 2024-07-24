@@ -63,8 +63,10 @@ export default function LoginPage() {
       
   }
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
 
     console.log("Email:", email);
     console.log("Password:", password);
@@ -72,6 +74,8 @@ export default function LoginPage() {
     console.log("Password Error:", passwordError);
 
     if (!emailError && !passwordError) {
+
+
         try {
             console.log("Enviando solicitud a la API...");
             
@@ -102,6 +106,7 @@ export default function LoginPage() {
             } else {
                 setPasswordError('Ocurrió un error, por favor intenta nuevamente');
             }
+
         }
     } else {
         console.log("Errores en la validación, no se enviará la solicitud.");
