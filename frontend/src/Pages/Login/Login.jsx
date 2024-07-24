@@ -67,24 +67,25 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     console.log("Email:", email);
     console.log("Password:", password);
     console.log("Email Error:", emailError);
     console.log("Password Error:", passwordError);
 
     if (!emailError && !passwordError) {
-
-
         try {
             console.log("Enviando solicitud a la API...");
-            
+
             console.log('email: ', email);
             console.log('password: ', password);
 
-            const response = await axios.post(`https://plataforma-i.onrender.com/users/login?email=${email}&password=${password}`, {
+            const response = await axios.post('https://plataforma-i.onrender.com/users/login', {
                 email: email,
                 password: password,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
 
             console.log("Respuesta de la API:", response);
@@ -106,7 +107,6 @@ export default function LoginPage() {
             } else {
                 setPasswordError('Ocurrió un error, por favor intenta nuevamente');
             }
-
         }
     } else {
         console.log("Errores en la validación, no se enviará la solicitud.");
