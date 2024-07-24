@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -20,6 +21,12 @@ public class UserService {
     private final EmailServiceImpl emailService;
     private final VerificationTokenRespository verificationTokenRespository;
 
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 
     public Optional<User> findUserByPhoneNumber(String phoneNumber) {
         return userRepository.findByPhoneNumber(phoneNumber);
@@ -62,6 +69,15 @@ public class UserService {
             user.setPassword(hashedPassword);
             userRepository.save(user);
             return true;
+        }
+        return false;
+    }
+
+    public boolean verifyUserCredentials(String email, String password) {
+        Optional<User> optionalUser = userRepository.findUserByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return BCrypt.checkpw(password, user.getPassword());
         }
         return false;
     }

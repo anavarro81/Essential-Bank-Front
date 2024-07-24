@@ -21,6 +21,15 @@ public class UserController {
     private final UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
+    }
+    @GetMapping("/all")
+    public ResponseEntity<Iterable<User>> getUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
         try {
@@ -72,22 +81,18 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestParam String email, @RequestParam String password) {
-        logger.info("Intentando iniciar sesión con email: {}", email);
+    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
 
         Optional<User> user = userService.findUserByEmail(email);
-
+        boolean isValid = userService.verifyUserCredentials(email, password);
         if (user.isPresent()) {
-            logger.info("Usuario encontrado con email: {}", email);
-            if (user.get().getPassword().equals(password)) {
-                logger.info("Contraseña correcta para el usuario: {}", email);
+            if (isValid) {
+
                 return ResponseEntity.ok(user.get());
             } else {
-                logger.warn("Contraseña incorrecta para el usuario: {}", email);
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         } else {
-            logger.warn("Usuario no encontrado con email: {}", email);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
