@@ -18,14 +18,26 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
 
+  const version = 1. 
 
   useEffect(() => {   
+    
     if (email > '' && password > '' && emailError == '' && passwordError == '') {
       setisDisabled(false)
     } else {
       setisDisabled(true)
     }  
   }, [email,password])
+
+
+  useEffect(() => {   
+    
+    console.log(typeof process.env.NODE_ENV);
+
+    document.title = `Essential Bank | ${process.env.NODE_ENV.substring(0, 3)} | ${version} `
+
+  }, [])
+  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
