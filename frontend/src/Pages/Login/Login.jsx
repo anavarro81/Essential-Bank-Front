@@ -18,7 +18,7 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
 
-  const version = 1. 
+  const version = 2 
 
   useEffect(() => {   
     
