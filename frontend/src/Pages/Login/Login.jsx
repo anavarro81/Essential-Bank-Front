@@ -19,39 +19,19 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
 
-  useEffect(() => {
-    
-    console.log('Entro en el useEffect');
-
-    console.log('email ', email );
-    console.log('password ', password );
-    console.log('emailError ', emailError);
-    console.log('passwordError ', passwordError);
-
+  useEffect(() => {   
     if (email > '' && password > '' && emailError == '' && passwordError == '') {
-      console.log('entro por 1');
       setisDisabled(false)
     } else {
-      console.log('entro por 2');
       setisDisabled(true)
     }  
-
-
   }, [email,password])
-  
-      
-  
-  
-  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const IngresarBtn = useRef(null)
-
-  
-
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -158,16 +138,12 @@ export default function LoginPage() {
 
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen bg-white space-y-4'>
+    <div className='flex flex-col items-center justify-evenly min-h-screen bg-white space-y-4'>
 
-      {/* Logo */}
-      <img src="/Logo.png" className='h-[57px]' alt="" />
-      
-      {/* Bievenido */}
-
-      <div>
-        <h2 className='text-4xl mb-8'> ¡Bienvenid@! </h2>
-      </div>
+      <header>
+      <img src="/Logo.png" className='h-[57px]' alt="" />    
+      <h2 className='text-4xl mb-8'> ¡Bienvenid@! </h2>
+      </header>
 
 
 
@@ -178,7 +154,9 @@ export default function LoginPage() {
 
         {/* User input*/}
         <label className='block mb-2 text-sm font-bold text-gray-700'>Correo electrónico</label>
-        <div className='flex items-center mb-1 rounded shadow relative bg-lightGrey'>
+        
+        <div className='flex items-center mb-1 relative  '>
+        
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <BiUser className='m-2' />
           </div>
@@ -187,7 +165,7 @@ export default function LoginPage() {
           <input 
             name='email'
             type='text' 
-            className={` ${emailError ? 'border-red-300' : 'border-none'} input-field pl-10 block  w-full p-2 leading-tight  text-gray-700  ` } 
+            className={` ${emailError ? 'border-red-300' : ''} pl-10 block w-full input-field p-2 leading-tight  text-gray-700  ` } 
             placeholder='Ingresa tu correo electronico'             
             onBlur={handleEmailChange}
             onChange={handleEmailChange}
@@ -204,16 +182,19 @@ export default function LoginPage() {
         
         {/* Clave input*/}
         <label className='block mb-2 mt-4 text-sm font-bold text-gray-700'>Clave de ingreso </label>
-        <div className={` flex items-center ${passwordError ? 'mb-1 border-red-300': 'mb-6 border-none'} relative bg-white border rounded shadow`}>
+        
+        <div className='flex items-center mb-1 relative  '>
+        
           
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <BiKey className='m-2 text-gray-700' />
         </div>
           
           <input 
-          
+          name='password'
           type={showPassword ? 'text' : 'password'} 
-          className= {`  pl-10  w-full p-2 leading-tight input-field text-gray-700 focus:outline-none focus:shadow-outline input-field-border`} 
+          // className= {`  pl-10  w-full p-2 leading-tight input-field text-gray-700 w-full `} 
+          className={` ${emailError ? 'border-red-300' : ''} pl-10 block w-full input-field p-2 leading-tight  text-gray-700  ` } 
           placeholder='Ingresa tu clave de acceso' 
 
           onBlur={handlePasswordChange}
@@ -223,8 +204,16 @@ export default function LoginPage() {
           
           id='claveInput' />
 
+            <button 
+              className="absolute inset-y-0 right-0 pr-1 flex items-center"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ?  <BiHide className='h-3'/> : <BiShowAlt />}
+                            
+            </button>
+
           
-          <button onClick={togglePasswordVisibility} className='p-2 text-gray-700'>
+          {/* <button onClick={togglePasswordVisibility} className='p-2 text-gray-700 bg-red-300'>
             {showPassword ? 
             
             <div className="absolute inset-y-0 right-0 pr-1 flex items-center pointer-events-none">
@@ -235,7 +224,7 @@ export default function LoginPage() {
               <BiShowAlt />
             </div>
           }
-          </button>
+          </button> */}
         </div>
         {passwordError && (
               <p className="text-sm text-red-600 mb-6" id="email-error">
@@ -250,7 +239,7 @@ export default function LoginPage() {
           <button type='submit' 
           disabled={isDisabled}
           // className={`w-full px-4 py-2 mb-4 text-black ${!emailError && !passwordError ?  'bg-green-600' :  'bg-lightGrey cursor-not-allowed' }  rounded  focus:outline-none`}  
-          className={`w-full px-4 py-2 mb-4 text-black secondary-button  rounded  focus:outline-none`}  
+          className={`w-full px-4 py-2 mb-4 text-black secondary-button  rounded  `}  
           ref={IngresarBtn} >
             Ingresar
           </button>
@@ -266,17 +255,20 @@ export default function LoginPage() {
         </div>
 
 
-        <div className='flex items-center justify-between text-center mt-4'>
+      
+        </form>
+      </div>
+      <div className='flex items-center justity-center gap-2'>
           <p className='text-gray-700'>¿Aún no tienes cuenta?</p>
           <button 
             
             // className='mt-2 px-4 py-2 bg-lightGrey text-black rounded  transition-colors'>  
-             className='w-full px-4 py-2 mb-4 text-black secondary-button  rounded  focus:outline-none'>  
+             className='w-full px-4 py-2 mb-4 text-black secondary-button  rounded  '>  
             <Link to={'/Register'}> Registrarse</Link>  
           </button>
         </div>
-        </form>
-      </div>
+
+
     </div>
   );
 }
