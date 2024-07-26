@@ -54,11 +54,6 @@ const TransferStepContainer = () => {
 
 
   const updateFormData = (data) => {
-  
-
-
-v
-
 
     setFormData((prevFormData) => ({
       ...prevFormData,
