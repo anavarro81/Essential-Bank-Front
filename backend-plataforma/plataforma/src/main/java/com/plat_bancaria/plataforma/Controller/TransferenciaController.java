@@ -25,7 +25,7 @@ public class TransferenciaController {
         Transferencia transferencia = transferenciasService.crearTransferencia(id,transferenciaDTO);
         return ResponseEntity.ok(transferencia);
     }
-
+    //
     @PostMapping("/confirmar-transferencia/{id}")
     public ResponseEntity<?> confirmarTransferencia(@PathVariable Long id) {
         transferenciasService.confirmarTransferencia(id);
