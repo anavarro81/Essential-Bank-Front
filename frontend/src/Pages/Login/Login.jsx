@@ -79,7 +79,7 @@ export default function LoginPage() {
             console.log('email: ', email);
             console.log('password: ', password);
 
-            const response = await axios.post('https://plataforma-i.onrender.com/users/login', {
+            const response = await axios.post('http://localhost:8080/users/login', {
                 email: email,
                 password: password,
             }, {

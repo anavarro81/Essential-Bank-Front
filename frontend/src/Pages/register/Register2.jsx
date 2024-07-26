@@ -12,7 +12,7 @@ export default function Register2() {
     const handleVerify = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://plataforma-i.onrender.com/users/verify', null, {
+            const response = await axios.post('http://localhost:8080/users/verify', null, {
                 params: {
                     email: email,
                     token: codigo

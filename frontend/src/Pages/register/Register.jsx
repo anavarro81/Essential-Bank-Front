@@ -21,7 +21,7 @@ export default function Register3() {
         e.preventDefault();
         try {
            
-            const response = await fetch('https://plataforma-i.onrender.com/users/register', {
+            const response = await fetch('http://localhost:8080/users/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -97,6 +97,7 @@ export default function Register3() {
 
                     <input type='text' name='phoneNumber' value={form.phoneNumber} onChange={handleChange} className='w-full p-2 leading-tight  bg-greyDesign text-gray-700 border-none focus:outline-none focus:shadow-outline' placeholder='' />
                 </div>
+                
 
 
 

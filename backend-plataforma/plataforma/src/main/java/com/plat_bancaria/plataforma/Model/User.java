@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Random;
 
 @Entity
 @Getter
@@ -36,5 +38,17 @@ public class User {
     private String phoneNumber;
     private String password;
 
+    @Column(name = "number_iban", unique = true)
+    private String numeroIBAN = generarNumeroIBAN();
+    @Column(name = "banco")
+    private String banco = "BBVA";
+    private BigDecimal saldo = BigDecimal.valueOf(10000.0);
+
     private boolean enabled;
+
+
+
+    private static String generarNumeroIBAN() {
+        return "ES" + new Random().nextInt(99999999);
+    }
 }
