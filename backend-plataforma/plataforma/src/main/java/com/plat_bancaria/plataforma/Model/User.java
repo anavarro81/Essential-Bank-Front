@@ -18,6 +18,8 @@ import java.util.Random;
 @AllArgsConstructor
 @Table(name = "\"user_table\"")
 public class User {
+    private static final Random random = new Random();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,6 +51,10 @@ public class User {
 
 
     private static String generarNumeroIBAN() {
-        return new Random().nextLong(999999999) + "";
+        String iban = "ES";
+        for (int i = 0; i < 22; i++) {
+            iban += random.nextInt(10); 
+        }
+        return iban;
     }
 }
