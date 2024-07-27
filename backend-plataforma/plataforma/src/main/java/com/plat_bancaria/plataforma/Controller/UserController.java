@@ -94,26 +94,5 @@ public class UserController {
     }
 
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest) {
-        String email = loginRequest.email();
-        String password = loginRequest.password();
 
-        Optional<User> user = userService.findUserByEmail(email);
-        boolean isValid = userService.verifyUserCredentials(email, password);
-
-        if (user.isPresent()) {
-            if (isValid) {
-                String token = tokenService.generateToken(email);
-                Map<String, Object> response = new HashMap<>();
-                response.put("user", user.get());
-                response.put("token", token);
-                return ResponseEntity.ok(response);
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
 }
