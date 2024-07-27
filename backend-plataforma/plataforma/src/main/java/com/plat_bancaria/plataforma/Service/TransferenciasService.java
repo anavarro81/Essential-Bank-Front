@@ -22,8 +22,8 @@ public class TransferenciasService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Transferencia crearTransferencia(Long id, TransferenciaDTO transferenciaDTO) {
-        User cuentaOrigen = userRepository.findById(id)
+    public Transferencia crearTransferencia(String ibanOrigen, TransferenciaDTO transferenciaDTO) {
+        User cuentaOrigen = userRepository.findByNumeroIBAN(ibanOrigen)
                 .orElseThrow(() -> new RuntimeException("Cuenta origen no encontrada"));
 
 

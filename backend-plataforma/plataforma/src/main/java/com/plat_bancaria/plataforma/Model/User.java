@@ -49,6 +49,6 @@ public class User {
 
 
     private static String generarNumeroIBAN() {
-        return "ES" + new Random().nextInt(99999999);
+        return new Random().nextLong(999999999) + "";
     }
 }

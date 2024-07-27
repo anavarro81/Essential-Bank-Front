@@ -12,9 +12,10 @@ import java.util.List;
 public interface TransferenciaRepository extends JpaRepository<Transferencia, Long> {
     List<Transferencia> findByCuentaOrigenIBANOrderByFechaDesc(User cuentaOrigenIBAN);
 
-    @Query("SELECT t FROM Transferencia t WHERE t.cuentaOrigenIBAN = :origen AND " +
-            "(t.ibanDestino LIKE %:searchTerm% OR " +
+    @Query("SELECT t FROM Transferencia t WHERE t.cuentaOrigenIBAN = :cuentaOrigenIBAN AND " +
+            "(t.cuentaDestinoIBAN LIKE %:searchTerm% OR " +
             "LOWER(t.nombreDestinatario) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
             "LOWER(t.bancoDestinatario) LIKE LOWER(CONCAT('%', :searchTerm, '%')))")
-    List<Transferencia> buscarTransferenciasFrecuentes(@Param("cuentaOrigenIBAN") User origen, @Param("searchTerm") String searchTerm);
+    List<Transferencia> buscarTransferenciasFrecuentes(@Param("cuentaOrigenIBAN") User cuentaOrigenIBAN, @Param("searchTerm") String searchTerm);
+
 }

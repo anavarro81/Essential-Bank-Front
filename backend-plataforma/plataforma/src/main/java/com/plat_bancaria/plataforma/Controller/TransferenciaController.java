@@ -4,6 +4,7 @@ import com.plat_bancaria.plataforma.Domain.TransferenciaDTO;
 import com.plat_bancaria.plataforma.Model.Transferencia;
 import com.plat_bancaria.plataforma.Model.User;
 import com.plat_bancaria.plataforma.Service.TransferenciasService;
+import com.plat_bancaria.plataforma.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +18,16 @@ import java.util.List;
 public class TransferenciaController {
 
     private final TransferenciasService transferenciasService;
-    private final User user;
-
+    private final UserService userService;
     @PostMapping("/crear-transferencia")
     public ResponseEntity<?> crearTransferencia(@RequestBody TransferenciaDTO transferenciaDTO) {
-        long id = Long.parseLong(user.getNumeroIBAN());
-        Transferencia transferencia = transferenciasService.crearTransferencia(id,transferenciaDTO);
+        Long userId = transferenciaDTO.userId();
+        User user = userService.getUserById(userId);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+        }
+        String ibanOrigen = user.getNumeroIBAN();
+        Transferencia transferencia = transferenciasService.crearTransferencia(ibanOrigen, transferenciaDTO);
         return ResponseEntity.ok(transferencia);
     }
     //
