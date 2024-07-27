@@ -32,30 +32,17 @@ const Transfer = () => {
 
   )
   
-  const [searchQuery, setSearchQuery] = useState('');
 
   
-
-  
-  const deleteTransition = (id) => {    
-    
-    console.log('id en deleteTransition = ', id);
+  const deleteTransition = (id) => {           
     toggleModal()
-    setId(id)
-    
-
-
+    setId(id)   
     
   }
 
   const confirmDelete = () => {
 
-      console.log('confirm delete');
-      console.log('id ', id );
-      console.log();
-
     const index = transfers.findIndex(transfer => transfer.id == id);
-
     console.log('index = ', index);
 
     if (index !== -1) {
@@ -66,20 +53,8 @@ const Transfer = () => {
   }
 
 
-    console.log('index = ', index);
+  
 
-
-    if (index !== -1) {
-       console.log('borro elemeno ', index);
-       transfers.splice(index, 1);
-    }
-    toggleModal()
-  }
-
-  const toggleModal = () => {    
-      setShowConfirmation(!showConfirmation)      
-    
-  }
 
 
 
@@ -89,10 +64,6 @@ const Transfer = () => {
   }
 
 
-     {showConfirmation && 
-      <DeleteFavoriteTranstation  
-        toggleModal={toggleModal} 
-        confirmDelete={confirmDelete}
 
 
   return (
@@ -174,6 +145,6 @@ const Transfer = () => {
 
     </>
   )
-}
 
+}
 export default Transfer
