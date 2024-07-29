@@ -59,13 +59,13 @@ Ofrece un DEMO INTERACTIVO en vivo, no un PDF prediseñado.
     <td>Yeimar</td>
     <td>Yecid Lemus</td>
     <td>Team Lead</td>
-    <td><a href="https://www.behance.net/ushiwushi" target="_blank">Ver xxx</a></td>
+    <td><a href="xxxxxx" target="_blank">Ver xxx</a></td>
   </tr>
   <tr>
     <td>Gloria</td>
     <td>Ramos</td>
     <td>Project Manager</td>
-    <td><a href="https://portfolio.agustin.top" target="_blank">Ver xxx</a></td>
+    <td><a href="xxxxx" target="_blank">Ver xxx</a></td>
   </tr>
    <tr>
     <td>Antonio</td>
@@ -83,13 +83,13 @@ Ofrece un DEMO INTERACTIVO en vivo, no un PDF prediseñado.
     <td>Anthony</td>
     <td>xxx</td>
     <td>BackEnd</td>
-    <td><a href="https://www.linkedin.com/in/ang%C3%A9lica-borrero-b14591186/" target="_blank">Ver xxx</a></td>
+    <td><a href="xxxxxxx" target="_blank">Ver xxx</a></td>
   </tr>
      <tr>
     <td>Ana Cristina</td>
     <td>Morales</td>
     <td>UX/UI</td>
-    <td><a href="https://github.com/kalchaqui" target="_blank">Ver xxx</a></td>
+    <td><a href="https://www.behance.net/anamorales71/projects" target="_blank">Ver portafolio</a></td>
   </tr>
    <tr>
     <td>Carolina</td>
