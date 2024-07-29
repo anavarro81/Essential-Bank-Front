@@ -33,6 +33,62 @@ Ofrece un DEMO INTERACTIVO en vivo, no un PDF prediseñado.
 - Evitar depender de hijos o terceros para aprender repetidamente las mismas operaciones bancarias.
 - Proveer una solución para aquellos sin ayuda de confianza o que sienten vergüenza de pedir ayuda.
 
+
+<h2 align="center">✨ Equipo de trabajo ✨</h2>
+
+<table align="center">
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Rol</th>
+    <th>Portfolio</th>
+  </tr>
+  <tr>
+    <td>Yeimar</td>
+    <td>Yecid Lemus</td>
+    <td>Team Lead</td>
+    <td><a href="https://www.behance.net/ushiwushi" target="_blank">Ver xxx</a></td>
+  </tr>
+  <tr>
+    <td>Gloria</td>
+    <td>Ramos</td>
+    <td>Project Manager</td>
+    <td><a href="https://portfolio.agustin.top" target="_blank">Ver xxx</a></td>
+  </tr>
+   <tr>
+    <td>Antonio</td>
+    <td>Navarro</td>
+    <td>FrontEnd</td>
+    <td><a href="www.linkedin.com/in/antonio-navarro-b16303164" target="_blank">Ver xxx</a></td>
+  </tr>
+   <tr>
+    <td>Paul</td>
+    <td>Greg</td>
+    <td>BackEnd</td>
+    <td><a href="https://github.com/Paul-Greg" target="_blank">GitHub</a></td>
+  </tr>
+  <tr>
+    <td>Anthony</td>
+    <td>xxx</td>
+    <td>BackEnd</td>
+    <td><a href="https://www.linkedin.com/in/ang%C3%A9lica-borrero-b14591186/" target="_blank">Ver xxx</a></td>
+  </tr>
+     <tr>
+    <td>Ana Cristina</td>
+    <td>Morales</td>
+    <td>UX/UI</td>
+    <td><a href="https://github.com/kalchaqui" target="_blank">Ver xxx</a></td>
+  </tr>
+   <tr>
+    <td>Carolina</td>
+    <td>Arteaga</td>
+    <td>QA Tester</td>
+    <td><a href="www.linkedin.com/in/carola02" target="_blank">LinkedIn</a></td>
+  </tr>
+</table>
+
+<br>
+
 ### Colaboradores: 
 - Bryan Tevillo Betancourt
 - Chanchi Freyre
