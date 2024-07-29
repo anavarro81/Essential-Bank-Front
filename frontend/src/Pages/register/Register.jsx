@@ -233,6 +233,7 @@ export default function Register() {
                     </div>
                     {errors.email && <p className='text-red-500 text-xs italic'>{errors.email}</p>}
 
+
                     {/* Fecha de nacimiento input */}
                     <label className='block mb-2 text-sm font-bold text-gray-700'>Fecha de nacimiento</label>
                     <div className='flex items-center mb-6 border rounded shadow bg-greyDesign'>
@@ -247,6 +248,7 @@ export default function Register() {
                         />
                     </div>
                     {errors.birthDate && <p className='text-red-500 text-xs italic'>{errors.birthDate}</p>}
+
 
                     {/* Número de teléfono input */}
                     <label className='block mb-2 text-sm font-bold text-gray-700'>Número de teléfono</label>

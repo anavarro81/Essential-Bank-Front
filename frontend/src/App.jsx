@@ -55,18 +55,24 @@ function App() {
               <Route path='/RegisterPaso3' element={<Register3 />} />
 
 
+
               {/* <Route element={<PrivateRoutes />} > */}
+
+           
+
               <Route path='/Home' element={<Home />} />
               <Route path='/Transfers' element={<Transfer />} />
               <Route path='/TransferStepContainer' element={<TransferStepContainer />} />
               <Route path='/Pay' element={<Pay />} />
               <Route path='/PayStepContainer' element={<PayStepContainer />} />
               <Route path='Profile' element={<ProfilePage />} />
+
               <Route path='editName' element={<EditFullNamePage />} />
               <Route path='/editPassword' element={<EditPassword />} />
               <Route path='/editPhoneNumber' element={<EditPhoneNumber />} />
               <Route path='/editEmail' element={<EditEmail />} />
               {/* </Route> */}
+
 
 
 
