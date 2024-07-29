@@ -71,7 +71,7 @@ Ofrece un DEMO INTERACTIVO en vivo, no un PDF prediseñado.
     <td>Antonio</td>
     <td>Navarro</td>
     <td>FrontEnd</td>
-    <td><a href="www.linkedin.com/in/antonio-navarro-b16303164" target="_blank">Ver xxx</a></td>
+    <td><a href="www.linkedin.com/in/antonio-navarro-b16303164" target="_blank">LinkedIn</a></td>
   </tr>
    <tr>
     <td>Paul</td>
