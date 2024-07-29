@@ -65,7 +65,7 @@ Ofrece un DEMO INTERACTIVO en vivo, no un PDF prediseñado.
     <td>Gloria</td>
     <td>Ramos</td>
     <td>Project Manager</td>
-    <td><a href="xxxxx" target="_blank">Ver xxx</a></td>
+    <td><a href="https://confused-lemming-349.notion.site/Gloria-Ramos-2775138847284595ab709a47f5dd5e4f?pvs=4" target="_blank">Ver portafolio</a></td>
   </tr>
    <tr>
     <td>Antonio</td>
