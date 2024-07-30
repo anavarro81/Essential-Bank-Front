@@ -43,6 +43,9 @@ export default function Register3() {
     };
 
     const handleSubmit = async (e) => {
+        
+        console.log('estoy en handleSubmit');
+        
         e.preventDefault();
 
         const errors = validatePassword(password);
@@ -56,14 +59,34 @@ export default function Register3() {
             return;
         }
 
+
+        const API_URL_DESA = 'http://localhost:5000'    
+
+        const data = {
+            email: email,
+            password: password
+        }
+
+        let URL_BASE = ''
+
+        if (import.meta.env.MODE == 'development') {
+            URL_BASE = 'http://localhost:5000'
+          } else {
+             URL_BASE = import.meta.env.VITE_API_URL_PROD
+          }
+
         try {
-            const response = await axios.post('https://plataforma-i.onrender.com/users/set-password', {
-                email: email,
-                password: password
-            });
+
+  
+              console.log('URL_BASE >> ', URL_BASE);
+            
+            const response = await axios.post(`${URL_BASE}/users/set-password`, data)
+
+            console.log('>> response ', response);
+                
+            
             if (response.status === 200) {
-                localStorage.setItem('token', response.data.token);
-                navigate('/Home');
+                navigate('/');
             } else {
                 setMessage('Error al configurar la contraseña');
             }

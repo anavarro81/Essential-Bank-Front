@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";    
+import axios from 'axios';
+
+
 
 export default function Register() {
     const [form, setForm] = useState({
@@ -140,36 +144,39 @@ export default function Register() {
         setForm((prevForm) => ({ ...prevForm, [name]: trimmedValue }));
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Verificar que todos los campos estén llenos excepto DNI
-        const newErrors = {};
-        Object.keys(form).forEach(key => {
-            if (key !== 'dni' && !form[key]) {
-                newErrors[key] = 'Este campo es obligatorio';
-            }
-        });
 
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            return;
-        }
+        let URL_BASE = ''
+
+        if (import.meta.env.MODE == 'development') {
+             URL_BASE = 'http://localhost:5000'
+          } else {
+            URL_BASE = import.meta.env.VITE_API_URL_PROD
+          }
+
 
         try {
-            const response = await fetch('https://plataforma-i.onrender.com/users/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(form)
-            });
 
-            if (response.ok) {
+  
+              console.log('URL_BASE >> ', URL_BASE);
+           
+            const response = await axios.post(`${URL_BASE}/users/register`, form);
+
+            console.log('response>>>>>> ', response   );
+            
+            console.log('status >>>>', response.status   );
+
+            if (response.status == 201) {
+                console.log('Me he logado...');
+
                 navigate('/RegisterPaso2', { state: { email: form.email } });
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.log('Se ha producido un error en el registro:', error.response.data.error);
+            
         }
     };
 
