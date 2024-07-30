@@ -56,7 +56,7 @@ function App() {
 
 
 
-              {/* <Route element={<PrivateRoutes />} > */}
+              <Route element={<PrivateRoutes />} >
 
            
 
@@ -71,7 +71,7 @@ function App() {
               <Route path='/editPassword' element={<EditPassword />} />
               <Route path='/editPhoneNumber' element={<EditPhoneNumber />} />
               <Route path='/editEmail' element={<EditEmail />} />
-              {/* </Route> */}
+              </Route>
 
 
 
