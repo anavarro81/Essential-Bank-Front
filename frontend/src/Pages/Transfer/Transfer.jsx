@@ -24,7 +24,7 @@ const Transfer = () => {
 
   const [user, setsetUser] = useUser()
   const [transfers, setTransfers] = useState();
-
+  const [showConfirmation, setShowConfirmation] = useState(false)
   const API_URL_PROD = import.meta.env.VITE_API_URL_PROD
 
     

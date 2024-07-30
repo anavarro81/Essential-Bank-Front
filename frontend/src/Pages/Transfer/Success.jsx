@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../../components/Header'
 import user1Photho from '../../assets/Images/user1.jpg'
 
-const Success = ({data}) => {
+const Success = ({data, accountInfo}) => {
 
 
   // FIXME: Borrar esto. 
@@ -33,8 +33,8 @@ const Success = ({data}) => {
           
           <div>
             <span className='text-[22px]'> {data.amount} </span>        
-            <p id='beneficiary' className='text-[16px]' > {data.contactName ? data.contactName : 'Beneficiario no informado'} </p>
-            <p id='bank' className='text-[12px]'> {data.bankName ? data.bankName : 'Banco destino no informado'} </p>
+            <p id='beneficiary' className='text-[16px]' > {accountInfo.Holder ? accountInfo.Holder : 'Beneficiario no informado'} </p>
+            <p id='bank' className='text-[12px]'> {accountInfo.Bank ? accountInfo.Bank : 'Banco destino no informado'} </p>
             <p className='text-[12px]'> UBAN: {data.Iban} </p>
           </div>
 

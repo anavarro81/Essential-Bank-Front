@@ -16,6 +16,7 @@ const ProfilePage = () => {
   
     const logout = () => {
         localStorage.removeItem('token')
+        localStorage.removeItem('id')
         navigate('/')    
     }
   

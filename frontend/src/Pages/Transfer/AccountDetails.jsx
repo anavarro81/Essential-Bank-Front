@@ -1,9 +1,9 @@
 
 import Header from '../../components/Header'
-
 import { useState, useEffect, useRef } from 'react'
+import axios from 'axios'
 
-const AccountDails = ({updateFormData, setIsValidForm}) => {
+const AccountDails = ({updateFormData, setIsValidForm, getAccountInfo}) => {
 
 
 
@@ -15,7 +15,9 @@ const AccountDails = ({updateFormData, setIsValidForm}) => {
   const [contactNameError, setContactNameError] = useState(null)
   const [bankNameError, setBankError] = useState(null)
 
+  
 
+  
 
   
   const esPrimeraVez =  useRef(true)
@@ -25,10 +27,16 @@ const AccountDails = ({updateFormData, setIsValidForm}) => {
 
       // Si no hay error en los campos y se ha informado el iban deja continuar. 
 
+      if (iban) {
+        console.log('valido iban');
+        getAccountInfo(iban).then((data) => setIbanError(data))       
+      }
+
       if (!ibanerror && !contactNameError && !bankNameError && iban) {      
-        console.log('Formulario correcto');
-        updateFormData({'Iban': iban, 'contactName': contactName, 'bankName': bankName })
-        setIsValidForm(true)      
+          console.log('todo ok');
+          updateFormData({'Iban': iban, 'contactName': contactName, 'bankName': bankName })
+          setIsValidForm(true)       
+              
       } else {
         setIsValidForm(false)          
       }  

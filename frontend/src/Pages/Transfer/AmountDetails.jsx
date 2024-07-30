@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 
-const AmountDetails = ({updateFormData, setIsValidForm}) => {
+const AmountDetails = ({updateFormData, setIsValidForm, accountInfo}) => {
 
   
-  //FIXME: Cuando este el back, sustituir por la canitidad devuelta. 
-  const data = {
-    balance: 5435.00
-  }
-
+  console.log('accountInfo > ', accountInfo);
+  
   const [amount, setAmount] = useState(0)
   const [amountError, setAmountError] = useState('')
   
@@ -68,7 +65,7 @@ const AmountDetails = ({updateFormData, setIsValidForm}) => {
           // step="0.01"
         />
 
-      <p> Monto disponible ${data.balance} usd </p>
+      <p> Monto disponible ${accountInfo.Balance} usd </p>
 
       {amountError && <div> <p className='text-sm text-red-600'> {amountError} </p> </div> }
 

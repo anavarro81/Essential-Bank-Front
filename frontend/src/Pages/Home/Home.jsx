@@ -114,7 +114,7 @@ const Home = () => {
                 <section id='account-info'>
                     <p> El saldo actual de tu cuenta es </p>
                     <ToolTip id={'balanceDisplay'}>  
-                        {/* <p className='text-[36px]'> {user.accounts[0].Balance  <p> */}                         
+                        <p className='text-[36px]'> {user.accounts    && user.accounts[0].Balance}  </p>                         
                     </ToolTip>
                 </section>
 
