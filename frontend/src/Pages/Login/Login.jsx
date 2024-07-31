@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef,useEffect } from 'react';
 import { BiUser, BiKey, BiShowAlt, BiHide, BiFingerprint } from 'react-icons/bi';
 import { Link } from "react-router-dom"
 import users from '../../data/data'
@@ -8,10 +8,17 @@ import axios from 'axios';
 
 
 export default function LoginPage() {
+
+  
   
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [user, setsetUser] = useUser()
+
+  const [isDisabled, setisDisabled] = useState(true)
+  
+  
+  const API_URL_PROD = import.meta.env.VITE_API_URL_PROD
   
 
   const togglePasswordVisibility = () => {
@@ -28,6 +35,20 @@ export default function LoginPage() {
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+  useEffect(() => {
+    
+    
+
+
+    if (email > '' && password > '' && emailError == '' && passwordError == '') {
+      setisDisabled(false)
+    } else {
+      setisDisabled(true)
+    }  
+
+
+  }, [email,password])
 
 
   const handleEmailChange = (e) => {   
@@ -67,32 +88,52 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Email Error:", emailError);
-    console.log("Password Error:", passwordError);
 
     if (!emailError && !passwordError) {
         try {
-            console.log("Enviando solicitud a la API...");
+            
 
-            console.log('email: ', email);
-            console.log('password: ', password);
+            
+            
 
-            const response = await axios.post('https://plataforma-i.onrender.com/users/login', {
-                email: email,
-                password: password,
-            }, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+
+            
+            const data = {
+              email: email,
+              password: password,
+            }
+            
+            
+            let URL_BASE = ''
+            
+            if (import.meta.env.MODE == 'development') {
+              URL_BASE = 'http://localhost:5000'
+            } else {
+              URL_BASE = import.meta.env.VITE_API_URL_PROD
+            }
+
+            console.log('URL_BASE >> ', URL_BASE);
+
+            // const response = await axios.post(`https://essential-bank-back.vercel.app/users/login`, {
+              const response = await axios.post(`${URL_BASE}/users/login`, data)
+            
+
 
             console.log("Respuesta de la API:", response);
+            console.log('response.status ', response.status);
+            console.log('response.data.token ', response.data.token);
+            console.log('response.data.user.id ', response.data.user._id);
 
-            if (response.status === 200) {
-                navigate("/Home");
-                localStorage.setItem('token', response.data.token);
+            if (response.status == 200) {
+
+              
+
+              setsetUser(response.data.user)  
+              navigate("/Home");
+              localStorage.setItem('token', response.data.token)
+              localStorage.setItem('id', response.data.user._id)
+
+
             } else {
                 setPasswordError('Correo electrónico o contraseña incorrectos');
             }
@@ -122,15 +163,11 @@ export default function LoginPage() {
     <div className='flex flex-col items-center justify-center min-h-screen bg-white'>
 
       {/* Logo Essential Bank */}
-      <div className='mb-8 text-center'>
-        <h1 className='text-6xl font-bold text-blue-500'>Essential</h1>
-        <h2 className='text-4xl font-bold text-blue-700'>Bank</h2>
-      </div>
-
+      <img src="/Logo.png" className='h-[57px]' alt="" />
       {/* Bievenido */}
 
       <div>
-        <h2 className='text-4xl mb-8'> ¡¡¡Bienvenid@!!! </h2>
+      <h2 className='text-4xl mb-8'> ¡Bienvenid@! </h2>
       </div>
 
 
@@ -141,7 +178,7 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit}> 
 
         {/* User input*/}
-        <label className='block mb-2 text-sm font-bold text-gray-700'>Usuario</label>
+        <label className='block mb-2 text-sm font-bold text-gray-700'>Correo electrónico</label>
         <div className='flex items-center mb-1 border rounded shadow relative bg-lightGrey'>
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <BiUser className='m-2' />
@@ -165,7 +202,7 @@ export default function LoginPage() {
             )}
 
         {/* Clave input*/}
-        <label className='block mb-2 mt-4 text-sm font-bold text-gray-700'>Clave</label>
+        <label className='block mb-2 mt-4 text-sm font-bold text-gray-700'>Clave de ingreso</label>
         <div className={` flex items-center ${passwordError ? 'mb-1 border-red-300': 'mb-6 border-none'} relative bg-lightGrey border rounded shadow`}>
           
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -206,9 +243,18 @@ export default function LoginPage() {
 
 
         
-          <button type='submit' className={`w-full px-4 py-2 mb-4 text-black ${!emailError && !passwordError ?  'bg-green-600' :  'bg-lightGrey cursor-not-allowed' }  rounded  focus:outline-none`}  ref={IngresarBtn} >
+          {/* <button type='submit' className={`w-full px-4 py-2 mb-4 text-black ${!emailError && !passwordError ?  'bg-green-600' :  'bg-lightGrey cursor-not-allowed' }  rounded  focus:outline-none`}  ref={IngresarBtn} >
+            Ingresar
+          </button> */}
+
+          <div className='flex justify-center'> 
+            <button type='submit' 
+            disabled={isDisabled}            
+            className={`w-full px-4 py-2 mb-4 text-black secondary-button  rounded  focus:outline-none`}  
+            ref={IngresarBtn} >
             Ingresar
           </button>
+          </div>
         
 
 

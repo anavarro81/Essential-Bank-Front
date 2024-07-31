@@ -5,7 +5,7 @@ import user1Photho from '../../assets/Images/user1.jpg'
 
 
 
-const Confirmation = ({data}) => {
+const Confirmation = ({data, accountInfo}) => {
 
   //FIXME: Sustituir el objeto por lo recuperado en el back. 
 
@@ -35,8 +35,8 @@ const Confirmation = ({data}) => {
             <span id='amount' className='text-2xl font-medium text-primary'> {data.amount} </span>        
             
             {/* FIXME: Sustituir por los datos de la cuenta */ }
-            <p  id='beneficiary'>  </p>
-            <p className='text-sm' id='bank'>  </p>
+            <p  id='beneficiary'> {accountInfo.Holder} </p>
+            <p className='text-sm' id='bank'> {accountInfo.Bank} </p>
             
             <p className='text-sm'> UBAN: {data.Iban} </p>
           </div>
