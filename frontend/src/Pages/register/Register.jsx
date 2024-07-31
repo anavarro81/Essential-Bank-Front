@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-
-import { Link, useNavigate } from "react-router-dom";    
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-
-
 
 export default function Register() {
     const [form, setForm] = useState({
@@ -22,6 +19,8 @@ export default function Register() {
         birthDate: ''
     });
 
+    const [generalError, setGeneralError] = useState('');
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -34,6 +33,15 @@ export default function Register() {
         const { name, value } = e.target;
         let trimmedValue = value.trim(); // Eliminar espacios al inicio y al final
 
+        if (trimmedValue === '') {
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                [name]: 'Este campo es obligatorio'
+            }));
+            return;
+        }
+
+        // Validaciones específicas por campo
         if (name === 'name') {
             const regex = /^[A-Za-zÑñ\s]*$/; // Solo permitir letras del alfabeto latino, ñ y espacios
 
@@ -48,7 +56,7 @@ export default function Register() {
             if (trimmedValue.length > 30) {
                 setErrors((prevErrors) => ({
                     ...prevErrors,
-                    name: 'Máximo 15 caracteres'
+                    name: 'Máximo 30 caracteres'
                 }));
                 return;
             }
@@ -104,6 +112,16 @@ export default function Register() {
                 }));
                 return;
             }
+        } else if (name === 'email') {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular básica para validar un correo electrónico
+
+            if (!regex.test(trimmedValue)) {
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    email: 'Correo electrónico no válido'
+                }));
+                return;
+            }
         } else if (name === 'phoneNumber') {
             const cleanedValue = value.replace(/\s+/g, ''); // Eliminar todos los espacios
             const regex = /^[0-9]*$/; // Solo permitir números
@@ -144,39 +162,43 @@ export default function Register() {
         setForm((prevForm) => ({ ...prevForm, [name]: trimmedValue }));
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Validar todos los campos
+        let newErrors = {};
+        for (let key in form) {
+            if (form[key].trim() === '') {
+                newErrors[key] = 'Este campo es obligatorio';
+            }
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            setGeneralError('Por favor, corrige los errores en el formulario.');
+            return;
+        }
 
         let URL_BASE = ''
 
-        if (import.meta.env.MODE == 'development') {
-             URL_BASE = 'http://localhost:5000'
-          } else {
+        if (import.meta.env.MODE === 'development') {
+            URL_BASE = 'http://localhost:5000'
+        } else {
             URL_BASE = import.meta.env.VITE_API_URL_PROD
-          }
-
+        }
 
         try {
-
-  
-              console.log('URL_BASE >> ', URL_BASE);
-           
+            console.log('URL_BASE >> ', URL_BASE);
             const response = await axios.post(`${URL_BASE}/users/register`, form);
+            console.log('response>>>>>> ', response);
+            console.log('status >>>>', response.status);
 
-            console.log('response>>>>>> ', response   );
-            
-            console.log('status >>>>', response.status   );
-
-            if (response.status == 201) {
+            if (response.status === 201) {
                 console.log('Me he logado...');
-
                 navigate('/RegisterPaso2', { state: { email: form.email } });
             }
         } catch (error) {
             console.log('Se ha producido un error en el registro:', error.response.data.error);
-            
         }
     };
 
@@ -194,6 +216,7 @@ export default function Register() {
             </div>
 
             <div className='w-full max-w-xs'>
+                {generalError && <p className='text-red-500 text-center mb-4'>{generalError}</p>}
                 <form onSubmit={handleSubmit}>
                     {/* Nombre completo input */}
                     <label className='block mb-2 text-sm font-bold text-gray-700'>Nombre completo</label>
@@ -272,12 +295,10 @@ export default function Register() {
                     </div>
                     {errors.phoneNumber && <p className='text-red-500 text-xs italic'>{errors.phoneNumber}</p>}
 
-
-                    <div className='flex justify-end  text-center mt-4'>
-                        <button className='mt-2 mr-2 px-4 py-2 text-black rounded  transition-colors'> <Link to="/"> Atras </Link></button>
-                        <button type='submit' className='mt-2 px-4 py-2 bg-[#242054] text-white rounded  transition-colors'> Siguiente </button>
+                    <div className='flex justify-end text-center mt-4'>
+                        <button className='mt-2 mr-2 px-4 py-2 text-black rounded transition-colors'> <Link to="/"> Atras </Link></button>
+                        <button type='submit' className='mt-2 px-4 py-2 bg-[#242054] text-white rounded transition-colors'> Siguiente </button>
                     </div>
-
                 </form>
             </div>
         </div>
